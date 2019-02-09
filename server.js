@@ -8,7 +8,7 @@ import axios from 'axios'
 
 
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000 
 
 // initialize express 
 const app = express()
@@ -23,4 +23,8 @@ app.use(express.static("public"));
 
 app.get('/', (req,res) => {
   res.send('test')
+})
+
+app.listen( PORT, () => {
+  console.log('listening on PORT ' + PORT)
 })
