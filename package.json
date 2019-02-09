@@ -4,7 +4,6 @@
   "description": "News Scraper",
   "main": "server.js",
   "scripts": {
-  
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/server.js",
     "test": "npm run build && node dist/server.js"
@@ -21,6 +20,7 @@
   "homepage": "https://github.com/kmajor1/newsscrape#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-preset-env": "^1.7.0",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
