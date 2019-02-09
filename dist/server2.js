@@ -39,6 +39,25 @@ app.use(_express2.default.json());
 // Make public a static folder
 app.use(_express2.default.static("public"));
 
+// connect to mongodb 
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
+
+_mongoose2.default.connect(MONGODB_URI);
+
+// root path
 app.get('/', function (req, res) {
-  res.send('test');
+  res.send('News Scraper Root');
+});
+
+// route for scraper 
+app.get('/scraper', function (req, res) {
+  _axios2.default.get('https://www.google.ca/').then(function (response) {});
+
+  res.send('All Done');
+});
+
+// function to start server 
+app.listen(PORT, function () {
+  console.log('Server running on PORT:' + PORT);
 });

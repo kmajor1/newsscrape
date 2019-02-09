@@ -1,11 +1,12 @@
-const mongoose = require('mongoose')
-const express = require('express')
+import mongoose from 'mongoose'
+import express from 'express'
 import logger from 'morgan'
 
-const db = require('./models')
+import db from './models'
+import cheerio from 'cheerio'
+import axios from 'axios'
 
-const axios = require('axios')
-const cheerio = require('cheerio')
+
 
 const PORT = 3000
 
@@ -20,30 +21,6 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-
-// connect to mongodb 
-// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
-
-mongoose.connect(MONGODB_URI);
-
-// root path
 app.get('/', (req,res) => {
-  res.send('News Scraper Root')
+  res.send('test')
 })
-
-// route for scraper 
-app.get('/scraper',(req,res) => {
-  axios.get('https://www.google.ca/')
-    .then((response => {
-      
-    }))
-
-  res.send('All Done')
-})
-
-// function to start server 
-app.listen(PORT, () => {
-  console.log(`Server running on PORT:${PORT}`)
-})
-
