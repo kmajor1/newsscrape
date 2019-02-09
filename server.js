@@ -35,9 +35,16 @@ app.get('/', (req,res) => {
 
 // route for scraper 
 app.get('/scraper',(req,res) => {
-  axios.get('https://www.google.ca/')
+  axios.get('https://www.echojs.com/')
     .then((response => {
+      // store response parsed by cheerio
+      const $ = cheerio.load(response.data)
       
+      $("article h2").each((index, element) => {
+        const result = {}
+        result.title = $(this)
+      })
+
     }))
 
   res.send('All Done')

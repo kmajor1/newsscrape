@@ -52,7 +52,14 @@ app.get('/', function (req, res) {
 
 // route for scraper 
 app.get('/scraper', function (req, res) {
-  _axios2.default.get('https://www.google.ca/').then(function (response) {});
+  _axios2.default.get('https://www.echojs.com/').then(function (response) {
+    // store response parsed by cheerio
+    var $ = _cheerio2.default.load(response.data);
+
+    $("article").each(function (index, element) {
+      console.log(element);
+    });
+  });
 
   res.send('All Done');
 });
