@@ -33,3 +33,20 @@ app.use(express.static("public"));
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
 
 mongoose.connect(MONGODB_URI);
+
+// root path
+app.get('/', function (req, res) {
+  res.send('News Scraper Root');
+});
+
+// route for scraper 
+app.get('/scraper', function (req, res) {
+  axios.get('https://www.google.ca/').then(function (response) {});
+
+  res.send('All Done');
+});
+
+// function to start server 
+app.listen(PORT, function () {
+  console.log('Server running on PORT:' + PORT);
+});

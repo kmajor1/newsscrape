@@ -15,7 +15,7 @@ const app = express()
 // use morgan for logging 
 app.use(logger('dev'))
 // Parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true }));
 app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
@@ -26,4 +26,24 @@ app.use(express.static("public"));
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
 
 mongoose.connect(MONGODB_URI);
+
+// root path
+app.get('/', (req,res) => {
+  res.send('News Scraper Root')
+})
+
+// route for scraper 
+app.get('/scraper',(req,res) => {
+  axios.get('https://www.google.ca/')
+    .then((response => {
+      
+    }))
+
+  res.send('All Done')
+})
+
+// function to start server 
+app.listen(PORT, () => {
+  console.log(`Server running on PORT:${PORT}`)
+})
 
