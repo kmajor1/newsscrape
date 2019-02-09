@@ -43,7 +43,7 @@ app.use(_express2.default.static("public"));
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
 
-_mongoose2.default.connect(MONGODB_URI);
+//mongoose.connect(MONGODB_URI);
 
 // root path
 app.get('/', function (req, res) {
