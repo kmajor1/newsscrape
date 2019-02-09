@@ -8,7 +8,7 @@ import axios from 'axios'
 
 
 
-const PORT = process.env.PORT || 3000 
+const PORT = process.env.PORT || 3000
 
 // initialize express 
 const app = express()
@@ -21,10 +21,30 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
+
+// connect to mongodb 
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
+
+mongoose.connect(MONGODB_URI);
+
+// root path
 app.get('/', (req,res) => {
-  res.send('test')
+  res.send('News Scraper Root')
 })
 
-app.listen( PORT, () => {
-  console.log('listening on PORT ' + PORT)
+// route for scraper 
+app.get('/scraper',(req,res) => {
+  axios.get('https://www.google.ca/')
+    .then((response => {
+      
+    }))
+
+  res.send('All Done')
 })
+
+// function to start server 
+app.listen(PORT, () => {
+  console.log(`Server running on PORT:${PORT}`)
+})
+
