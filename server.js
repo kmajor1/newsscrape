@@ -28,11 +28,8 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper"
 
 mongoose.connect(MONGODB_URI);
 
-// root path
-app.get('/', (req,res) => {
-  res.send('News Scraper Root')
-})
 
+// get all articles 
 app.get('/articles', (req,res) => {
   db.Article.find({})
     .then((dbArticles) => {
@@ -73,6 +70,16 @@ app.get('/scrape',function(req,res) {
     }))
 
   res.send('All Done')
+})
+
+// route for single article 
+
+app.get('/articles/:id',(req,res) => {
+  db.Article.findById(req.params.id)
+    .populate('Comment')
+    .then((foundArticle) => {
+      console.log(foundArticle)
+    })
 })
 
 // function to start server 
