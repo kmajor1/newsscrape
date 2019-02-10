@@ -37,9 +37,10 @@ app.get('/articles', (req,res) => {
   db.Article.find({})
     .then((dbArticles) => {
       res.json(dbArticles)
+      console.log('Search Complete')
     }
     )
-    .then()
+    .catch((err) => console.log(err))
 }
 )
 

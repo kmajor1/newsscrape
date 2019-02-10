@@ -52,8 +52,17 @@ app.get('/', function (req, res) {
   res.send('News Scraper Root');
 });
 
+app.get('/articles', function (req, res) {
+  db.Article.find({}).then(function (dbArticles) {
+    res.json(dbArticles);
+    console.log('Search Complete');
+  }).catch(function (err) {
+    return console.log(err);
+  });
+});
+
 // route for scraper 
-app.get('/scraper', function (req, res) {
+app.get('/scrape', function (req, res) {
   _axios2.default.get('https://www.newyorktimes.com/').then(function (response) {
     // store response parsed by cheerio
     var $ = _cheerio2.default.load(response.data);
