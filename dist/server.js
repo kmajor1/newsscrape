@@ -52,12 +52,19 @@ app.get('/', function (req, res) {
 
 // route for scraper 
 app.get('/scraper', function (req, res) {
-  _axios2.default.get('https://www.echojs.com/').then(function (response) {
+  _axios2.default.get('https://www.newyorktimes.com/').then(function (response) {
     // store response parsed by cheerio
+    console.log(response.data);
     var $ = _cheerio2.default.load(response.data);
 
-    $("article").each(function (index, element) {
-      console.log(element);
+    $("article a").each(function (i, element) {
+      if ($(this).children('div').text() && $(this).children('div').children('h2').text() !== '') {
+        var result = {};
+        result.headline = $(this).children('div').children('h2').text();
+        result.URLref = 'https://www.newyorktimes.com' + $(this).attr('href');
+        result.summary = $(this).children('p').text();
+        console.log(result);
+      }
     });
   });
 

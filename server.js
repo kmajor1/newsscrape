@@ -34,16 +34,29 @@ app.get('/', (req,res) => {
 })
 
 // route for scraper 
-app.get('/scraper',(req,res) => {
-  axios.get('https://www.echojs.com/')
-    .then((response => {
+app.get('/scraper',function(req,res) {
+  axios.get('https://www.newyorktimes.com/')
+    .then((function(response) {
       // store response parsed by cheerio
+      console.log(response.data)
       const $ = cheerio.load(response.data)
       
-      $("article h2").each((index, element) => {
-        const result = {}
-        result.title = $(this)
+
+      $("article a").each(function(i, element){
+        if ($(this).children('div').text() && ($(this).children('div').children('h2').text())!=='') {
+          let result = {}
+          result.headline =  $(this).children('div').children('h2').text()
+          result.URLref = 'https://www.newyorktimes.com' +  $(this).attr('href')
+          result.summary = $(this).children('p').text()
+          console.log(result)
+        }
+        // create entry for each headline 
+        
       })
+
+      // create an entry to the DB 
+
+     
 
     }))
 

@@ -21,7 +21,7 @@ var articleSchema = new Schema({
     type: String,
     required: true
   },
-  URL: {
+  URLref: {
     type: String,
     required: true
   },
