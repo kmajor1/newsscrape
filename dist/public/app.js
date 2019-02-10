@@ -19,6 +19,6 @@ $(document).on('click', 'p', function () {
   }).then(function (data) {
     console.log(data);
     // article title 
-    $("#comments").append("<h2>" + data.headline + "</h2>");
+    $("#comments").append("<h4>" + data.headline + "</h2>");
   });
 });
