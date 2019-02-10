@@ -79,6 +79,7 @@ app.get('/articles/:id',(req,res) => {
     .populate('Comment')
     .then((foundArticle) => {
       console.log(foundArticle)
+      res.json(foundArticle)
     })
 })
 

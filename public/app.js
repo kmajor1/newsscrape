@@ -7,6 +7,7 @@ $.getJSON('/articles', (data) => {
 })
 
 $(document).on('click','p', function() {
+  $("#comments").empty()
   let clickedId = $(this).attr('data-id')
 
   // go get the article
@@ -14,7 +15,10 @@ $(document).on('click','p', function() {
     method: 'GET', 
     url: '/articles/' + clickedId
   })
-    .then((dbClickedArticle) => {
-      console.log(dbClickedArticle)
+    .then(function(data) {
+      console.log(data)
+      // article title 
+      $("#comments").append("<h2>" + data.headline + "</h2>")
+
     })
 })

@@ -47,11 +47,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
 
 _mongoose2.default.connect(MONGODB_URI);
 
-// root path
-app.get('/', function (req, res) {
-  res.send('News Scraper Root');
-});
-
+// get all articles 
 app.get('/articles', function (req, res) {
   db.Article.find({}).then(function (dbArticles) {
     res.json(dbArticles);
@@ -88,6 +84,15 @@ app.get('/scrape', function (req, res) {
   });
 
   res.send('All Done');
+});
+
+// route for single article 
+
+app.get('/articles/:id', function (req, res) {
+  db.Article.findById(req.params.id).populate('Comment').then(function (foundArticle) {
+    console.log(foundArticle);
+    res.json(foundArticle);
+  });
 });
 
 // function to start server 

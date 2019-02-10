@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>NYT News Scraper!</title>
@@ -11,14 +13,28 @@
   <script src="app.js"></script>
 </head>
 <body>
-  <div id="body" class="container">
-    <div class="row">
-      <div class="col">
-        <h1>New York Times News Scraper!</h1>
+  <div id="body" class="container mt-3">
+    <div id="maintitle" class="row">
+      <div class="jumbotron shadow col">
+        <h1 class="text-center">New York Times News Scraper!</h1>
       </div>
     </div>
+    <div id="options" class="row">
+      <div class="col-1">
+        <h2 class="text-left">Scrape</h2>
+        <button class="btn btn-primary">Scrape now</button>
+      </div>
+      <div class="col-11">
+        <h2 class="text-center ml-5">View the news</h2>
+        <div id="articles"></div>
+        <div id="comments"></div>
+      </div>
+    </div>
+    
   </div>
   
-  
+  <!-- jQuery and internal script -->
+  <script src="app.js"></script>
+
 </body>
 </html>
