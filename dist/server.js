@@ -14,7 +14,7 @@ var _morgan2 = _interopRequireDefault(_morgan);
 
 var _models = require('./models');
 
-var _models2 = _interopRequireDefault(_models);
+var db = _interopRequireWildcard(_models);
 
 var _cheerio = require('cheerio');
 
@@ -23,6 +23,8 @@ var _cheerio2 = _interopRequireDefault(_cheerio);
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43,7 +45,7 @@ app.use(_express2.default.static("public"));
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
 
-//mongoose.connect(MONGODB_URI);
+_mongoose2.default.connect(MONGODB_URI);
 
 // root path
 app.get('/', function (req, res) {
@@ -54,18 +56,26 @@ app.get('/', function (req, res) {
 app.get('/scraper', function (req, res) {
   _axios2.default.get('https://www.newyorktimes.com/').then(function (response) {
     // store response parsed by cheerio
-    console.log(response.data);
     var $ = _cheerio2.default.load(response.data);
 
     $("article a").each(function (i, element) {
       if ($(this).children('div').text() && $(this).children('div').children('h2').text() !== '') {
         var result = {};
         result.headline = $(this).children('div').children('h2').text();
+        result.summary = $(this).children('p').text() || 'No Summary Available';
         result.URLref = 'https://www.newyorktimes.com' + $(this).attr('href');
-        result.summary = $(this).children('p').text();
         console.log(result);
       }
+      // create entry for each headline 
+      db.Article.create(result).then(function (dbResult) {
+        return console.log(dbResult);
+      }).catch(function (err) {
+        return console.log(err);
+      });
     });
+
+    // create an entry to the DB 
+
   });
 
   res.send('All Done');
