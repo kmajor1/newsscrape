@@ -35,7 +35,7 @@ $(document).on('click','p', function() {
     .then(function(articleData)  {
       // article title 
       console.log(articleData)
-      $("#comments").append("<h4>" + articleData.headline + "</h2>")
+      $("#comments").append("<h4>" + articleData.headline + "</h4>")
 
     })
 })
