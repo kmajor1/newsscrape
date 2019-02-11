@@ -8,7 +8,7 @@ $.getJSON('/articles', function (data) {
   }
 });
 
-$(document).on('click', 'p', function () {
+$(document).one('click', 'p', function () {
   $("#comments").empty();
   var clickedId = $(this).attr('data-id');
 
@@ -16,9 +16,10 @@ $(document).on('click', 'p', function () {
   $.ajax({
     method: 'GET',
     url: '/articles/' + clickedId,
-    dataType: 'application/JSON'
-  }).then(function (data) {
+    dataType: 'json'
+  }).then(function (articleData) {
     // article title 
-    $("#comments").append("<h4>" + data.headline + "</h2>");
+    console.log(articleData);
+    $("#comments").append("<h4>" + articleData.headline + "</h2>");
   });
 });
