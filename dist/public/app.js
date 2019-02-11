@@ -8,7 +8,7 @@ $.getJSON('/articles', function (data) {
   }
 });
 
-$("body").on('click', 'p', function () {
+$(document).on('click', 'p', function () {
   $("#comments").empty();
   var clickedId = $(this).attr('data-id');
 
