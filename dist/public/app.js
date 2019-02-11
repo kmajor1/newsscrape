@@ -4,9 +4,15 @@
 function getArticles() {
   console.log('Call get articles');
   $.getJSON('/articles', function (data) {
-    // create an article for each returned item
-    for (var i = 0; i < data.length; i++) {
-      $('#articles').append('<p data-id=' + data[i]._id + ' class="ml-5"' + '>' + data[i].headline + '<br> ' + data[i].URLref + '</p>');
+    if (data.length !== 0) {
+      // create <p> tag for each article
+      for (var i = 0; i < data.length; i++) {
+        $('#articles').append('<p data-id=' + data[i]._id + ' class="ml-5"' + '>' + data[i].headline + '<br> ' + data[i].URLref + '</p>');
+      }
+      $("#scrapeNow").text('News Pulled!');
+      $("#scrapeNow").addClass('disabled');
+    } else {
+      $("#scrapeNow").text('No Articles stored: Pull News Now!');
     }
   });
 }
@@ -28,7 +34,6 @@ $(document).on('click', 'p', function () {
 });
 
 window.onload = function (e) {
-  console.log('onload event fired');
   getArticles();
   $("#scrapeNow").on('click', function (e) {
     $("#scrapeNow").text('Loading...');
@@ -37,9 +42,6 @@ window.onload = function (e) {
       url: '/scrape'
     }).then(function (data) {
       getArticles();
-      $("#scrapeNow").text('Done!');
-      $("#scrapeNow").unbind('click');
-      $("#scrapeNow").addClass('disabled');
     });
   });
 };
