@@ -44,6 +44,7 @@ app.get('/articles', (req,res) => {
 
 // route for scraper 
 app.get('/scrape',function(req,res) {
+  console.log('scrape initiated')
   axios.get('https://www.newyorktimes.com/')
     .then((function(response) {
       // store response parsed by cheerio
