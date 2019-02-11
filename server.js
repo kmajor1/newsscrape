@@ -59,17 +59,20 @@ app.get('/scrape',function(req,res) {
         }
         // create entry for each headline 
         db.Article.create(result)
-          .then((dbResult) => console.log(dbResult))
+          .then((dbResult) => {
+            console.log(dbResult)
+            
+          })
           .catch((err) => console.log(err))
       })
 
       // create an entry to the DB 
 
-     
+     res.send(response.data)
 
     }))
 
-  res.send('All Done')
+  
 })
 
 // route for single article 
@@ -78,7 +81,7 @@ app.get('/articles/:id',(req,res) => {
   db.Article.findById(req.params.id)
     .populate('Comment')
     .then((foundArticle) => {
-      console.log(foundArticle)
+      //console.log(foundArticle)
       res.json(foundArticle)
     })
 })

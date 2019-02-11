@@ -73,7 +73,7 @@ app.get('/scrape', function (req, res) {
       }
       // create entry for each headline 
       db.Article.create(result).then(function (dbResult) {
-        return console.log(dbResult);
+        console.log(dbResult);
       }).catch(function (err) {
         return console.log(err);
       });
@@ -81,16 +81,15 @@ app.get('/scrape', function (req, res) {
 
     // create an entry to the DB 
 
+    res.send(response.data);
   });
-
-  res.send('All Done');
 });
 
 // route for single article 
 
 app.get('/articles/:id', function (req, res) {
   db.Article.findById(req.params.id).populate('Comment').then(function (foundArticle) {
-    console.log(foundArticle);
+    //console.log(foundArticle)
     res.json(foundArticle);
   });
 });

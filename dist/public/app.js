@@ -15,9 +15,9 @@ $(document).on('click', 'p', function () {
   // go get the article
   $.ajax({
     method: 'GET',
-    url: '/articles/' + clickedId
+    url: '/articles/' + clickedId,
+    dataType: 'application/JSON'
   }).then(function (data) {
-    console.log(data);
     // article title 
     $("#comments").append("<h4>" + data.headline + "</h2>");
   });
