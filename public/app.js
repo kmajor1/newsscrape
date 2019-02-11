@@ -6,7 +6,7 @@ $.getJSON('/articles', (data) => {
   }
 })
 
-$(document).one('click','p', function() {
+$("body").on('click','p', function() {
   $("#comments").empty()
   let clickedId = $(this).attr('data-id')
 
