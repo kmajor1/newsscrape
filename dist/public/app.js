@@ -45,6 +45,17 @@ $(document).on('click', 'p', function () {
   });
 });
 
+// comment button click behaviour 
+// must be an event delegation as button is created dynamically
+
+$("#comments").on('click', 'button', function (e) {
+  e.preventDefault();
+  console.log('comment button click event');
+});
+
+// add click behaviour to scrape button
+// invoke getArticles on document load 
+
 window.onload = function (e) {
   getArticles();
   $("#scrapeNow").on('click', function (e) {
