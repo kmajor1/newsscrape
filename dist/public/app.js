@@ -73,6 +73,12 @@ $("#comments").on('click', 'button', function (e) {
   $("#inputBody").empty();
 });
 
+// button to compare to NYT 
+$("#compareToNYT").on('click', function (e) {
+  e.preventDefault();
+  window.open('http://www.newyorktimes.com/', '_blank');
+});
+
 // add click behaviour to scrape button
 // invoke getArticles on document load 
 
@@ -82,6 +88,7 @@ window.onload = function (e) {
     if (scraped) {
       return 0;
     }
+
     $("#scrapeNow").text('Loading...');
     $.ajax({
       method: 'GET',
