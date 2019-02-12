@@ -42,9 +42,9 @@ $(document).on('click', 'p', function () {
     // article title 
     console.log(articleData);
     $("#comments").append("<h4>" + articleData.headline + "</h4>");
-    $("#comments").append('<div id="commentForm" class="form-group"><input class="form-control" id="inputTitle" type="text" name="title" placeholder="Give it a title"></div><div class="form-group"><textarea class="form-control" id="inputBody" name="body">Type your comment</textarea></div><button id="submitComment" data-id="' + articleData._id + '" type="submit" class="btn btn-primary">Comment Now</button>');
+    $("#comments").append('<div id="commentForm" class="form-group"><input class="form-control" id="inputTitle" type="text" name="title" placeholder="Give it a title"></div><div class="form-group"><textarea class="form-control" id="inputBody" name="body" placeholder="Type your comment!"></textarea></div><button id="submitComment" data-id="' + articleData._id + '" type="submit" class="btn btn-primary">Comment Now</button>');
     if (articleData.comment) {
-      $("#commentForm").append('<button class="btn btn-danger" data-id="1">Delete Comment</button>');
+      $("#comments").append('<button class="btn btn-danger mx-3" data-id="1">Delete Comment</button>');
     }
     // add current comment, if there is one 
     if (articleData.comment) {
