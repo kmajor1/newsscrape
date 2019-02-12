@@ -6,7 +6,7 @@ function getArticles () {
     if (data.length !== 0) {
       // create <p> tag for each article
       for (let i = 0; i < data.length; i++) {
-        $('#articles').append(`<p data-id=` + data[i]._id + ` class="ml-5"` + `>` + data[i].headline  + `<br> `+ data[i].URLref + `</p>`)
+        $('#articles').append(`<p data-id=` + data[i]._id + ` class="ml-5"` + `>` + data[i].headline  + `<br> `+ data[i].URLref + `</p><hr>`)
       }
       $("#scrapeNow").text('News Pulled!')
       $("#scrapeNow").addClass('disabled')

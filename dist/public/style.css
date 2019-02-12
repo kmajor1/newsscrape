@@ -1,5 +1,5 @@
 p:hover {
-  border-style: solid;
-  border-color: black; 
-  border-width: 2px; 
+  text-decoration: underline;
+  color: royalblue;
+  text-shadow: 1px 1px red; 
 }
