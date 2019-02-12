@@ -1,16 +1,23 @@
 'use strict';
 
 var scraped = false;
+
+// tooltip event
 // Function to grab all articles stored in database
 function getArticles() {
   $.getJSON('/articles', function (data) {
     if (data.length !== 0) {
       // create <p> tag for each article
       for (var i = 0; i < data.length; i++) {
-        $('#articles').append('<p data-id=' + data[i]._id + ' class="ml-5"' + '>' + data[i].headline + '<br> ' + data[i].URLref + '</p><hr>');
+        $('#articles').append('<p data-id=' + data[i]._id + ' class="ml-5 mb-0"><span class="headline" data-toggle="tooltip" data-placement="top" title="Click to Comment!">' + data[i].headline + '</span><br><small>' + data[i].summary + '</small><br><small><a href=' + data[i].URLref + ' target="_blank">' + data[i].URLref + '</a></p><hr>');
       }
       $("#scrapeNow").text('News Pulled!');
       $("#scrapeNow").addClass('disabled');
+      $('[data-toggle="tooltip"]').tooltip({
+
+        delay: 250
+      });
+
       scraped = true;
     } else {
       $("#scrapeNow").text('No Articles stored: Pull News Now!');

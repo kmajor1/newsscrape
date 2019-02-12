@@ -1,4 +1,4 @@
-p:hover {
+span.headline:hover {
   text-decoration: underline;
   color: royalblue;
   text-emphasis: bold; 
