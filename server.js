@@ -102,6 +102,11 @@ app.post('/articles/:id', (req,res) => {
     .catch((err) => console.log('error'))
   })
 
+  // delete comment route
+  app.delete('/delete/:id', (req,res) => {
+    // add logic to delete comment from db 
+  })
+
 // function to start server 
 app.listen(PORT, () => {
   console.log(`Server running on PORT:${PORT}`)

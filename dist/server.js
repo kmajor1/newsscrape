@@ -112,6 +112,11 @@ app.post('/articles/:id', function (req, res) {
   });
 });
 
+// delete comment route
+app.delete('/delete/:id', function (req, res) {
+  // add logic to delete comment from db 
+});
+
 // function to start server 
 app.listen(PORT, function () {
   console.log('Server running on PORT:' + PORT);
