@@ -12,7 +12,6 @@ function getArticles () {
       $("#scrapeNow").text('News Pulled!')
       $("#scrapeNow").addClass('disabled')
       $('[data-toggle="tooltip"]').tooltip({
-        
         delay: 250
       })
 
