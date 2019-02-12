@@ -56,7 +56,7 @@ app.get('/scrape',function(req,res) {
           var result = {}
           result.headline =  $(this).children('div').children('h2').text()
           result.summary = $(this).children('p').text()  || 'No Summary Available'
-          result.URLref = 'https://www.newyorktimes.com' +  $(this).attr('href')
+          result.URLref = 'https://www.nytimes.com' +  $(this).attr('href')
            console.log(result)
         }
         // create entry for each headline 
