@@ -104,7 +104,13 @@ app.post('/articles/:id', (req,res) => {
 
   // delete comment route
   app.delete('/delete/:id', (req,res) => {
-    // add logic to delete comment from db 
+    // find article based on id 
+    db.Article.findById(req.params.id)
+      .then((dbArticle) => {
+        
+        return db.Comment.findOneAndDelete({_id: dbArticle.comment})
+      })
+      .then((dbComment) => res.json(dbComment))
   })
 
 // function to start server 
