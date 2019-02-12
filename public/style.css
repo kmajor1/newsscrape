@@ -1,7 +1,7 @@
 p:hover {
   text-decoration: underline;
   color: royalblue;
-  text-shadow: 3px 1px royalblue; 
+  text-emphasis: bold; 
 
 }
 

@@ -1,7 +1,6 @@
-
+let scraped = false 
 // Function to grab all articles stored in database
 function getArticles () {
-  console.log('Call get articles')
   $.getJSON('/articles', (data) => {
     if (data.length !== 0) {
       // create <p> tag for each article
@@ -10,11 +9,12 @@ function getArticles () {
       }
       $("#scrapeNow").text('News Pulled!')
       $("#scrapeNow").addClass('disabled')
+      scraped = true 
 
     }
     else {
       $("#scrapeNow").text('No Articles stored: Pull News Now!')
-
+      scraped = false 
     }
   })
 }
@@ -53,11 +53,11 @@ $(document).on('click','p', function() {
 
 $("#comments").on('click','button', function(e) {
   e.preventDefault() 
-  console.log('comment button click event')
   // grab id of article 
   let articleId = $(this).attr('data-id')
   console.log(articleId)
   // AJAX POST call to update comment 
+  
   $.ajax({
     method: 'POST',
     url: '/articles/' + articleId,
@@ -81,6 +81,9 @@ $("#inputBody").empty()
 window.onload = function(e) {
   getArticles()
   $("#scrapeNow").on('click',function(e) {
+    if (scraped) {
+      return 0 
+    }
     $("#scrapeNow").text('Loading...')
     $.ajax({
       method: 'GET',
