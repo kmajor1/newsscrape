@@ -90,12 +90,25 @@ app.get('/scrape', function (req, res) {
   });
 });
 
-// route for single article 
+// route for grabbing a single article 
 
 app.get('/articles/:id', function (req, res) {
-  db.Article.findById(req.params.id).populate('Comment').then(function (foundArticle) {
+  db.Article.findById(req.params.id).populate('comment').then(function (foundArticle) {
     //console.log(foundArticle)
     res.json(foundArticle);
+  });
+});
+
+// route for posting a comment
+app.post('/articles/:id', function (req, res) {
+  db.Comment.create(req.body).then(function (dbComment) {
+    console.log('created note');
+    return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true }).populate("comment");
+  }).then(function (dbArticle) {
+    console.log('found article');
+    res.json(dbArticle);
+  }).catch(function (err) {
+    return console.log('error');
   });
 });
 

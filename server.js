@@ -77,16 +77,30 @@ app.get('/scrape',function(req,res) {
   
 })
 
-// route for single article 
+// route for grabbing a single article 
 
 app.get('/articles/:id',(req,res) => {
   db.Article.findById(req.params.id)
-    .populate('Comment')
+    .populate('comment')
     .then((foundArticle) => {
       //console.log(foundArticle)
       res.json(foundArticle)
     })
 })
+
+// route for posting a comment
+app.post('/articles/:id', (req,res) => {
+  db.Comment.create(req.body)
+    .then((dbComment) => {
+      console.log('created note')
+      return db.Article.findOneAndUpdate({_id:req.params.id}, {comment: dbComment._id}, {new: true}).populate("comment")
+    })
+    .then((dbArticle) => {
+      console.log('found article')
+      res.json(dbArticle)
+    })
+    .catch((err) => console.log('error'))
+  })
 
 // function to start server 
 app.listen(PORT, () => {
