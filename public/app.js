@@ -34,9 +34,15 @@ $(document).on('click','p', function() {
   })
     .then(function(articleData)  {
       // article title 
+      console.log('Running promise of get specific article')
       console.log(articleData)
       $("#comments").append("<h4>" + articleData.headline + "</h4>")
+      $("#comments").append(`<div class="form-group"><input class="form-control" id="inputTitle" type="text" name="title" placeholder="Give it a title"></div><div class="form-group"><textarea class="form-control" id="inputBody" name="body">Type your comment</textarea></div><button id="submitComment" type="submit" class="btn btn-primary">Comment Now</button>`)
 
+      // add current note, if there is one 
+      if (data.comment) {
+        console.log('There were some notes')
+      }
     })
 })
 
