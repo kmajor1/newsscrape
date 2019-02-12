@@ -34,7 +34,7 @@ $(document).on('click', 'p', function () {
     // article title 
     console.log(articleData);
     $("#comments").append("<h4>" + articleData.headline + "</h4>");
-    $("#comments").append('<div class="form-group"><input class="form-control" id="inputTitle" type="text" name="title" placeholder="Give it a title"></div><div class="form-group"><textarea class="form-control" id="inputBody" name="body">Type your comment</textarea></div><button id="submitComment" type="submit" class="btn btn-primary">Comment Now</button>');
+    $("#comments").append('<div class="form-group"><input class="form-control" id="inputTitle" type="text" name="title" placeholder="Give it a title"></div><div class="form-group"><textarea class="form-control" id="inputBody" name="body">Type your comment</textarea></div><button id="submitComment" data-id="' + articleData._id + '" type="submit" class="btn btn-primary">Comment Now</button>');
 
     // add current comment, if there is one 
     if (articleData.comment) {
@@ -51,6 +51,24 @@ $(document).on('click', 'p', function () {
 $("#comments").on('click', 'button', function (e) {
   e.preventDefault();
   console.log('comment button click event');
+  // grab id of article 
+  var articleId = $(this).attr('data-id');
+  console.log(articleId);
+  // AJAX POST call to update comment 
+  $.ajax({
+    method: 'POST',
+    url: '/articles/' + articleId,
+    data: {
+      title: $("#inputTitle").val(),
+      body: $("#inputBody").val()
+    }
+  }).then(function (commentUpdateResponse) {
+    console.log(commentUpdateResponse);
+    // empty comments section 
+    $("#comments").empty();
+  });
+  $("#inputTitle").empty();
+  $("#inputBody").empty();
 });
 
 // add click behaviour to scrape button
