@@ -11,13 +11,12 @@ function getArticles() {
       for (var i = 0; i < data.length; i++) {
         $('#articles').append('<p data-id=' + data[i]._id + ' class="ml-5 mb-0"><span class="headline" data-toggle="tooltip" data-placement="top" title="Click to Comment!">' + data[i].headline + '</span><br><small>' + data[i].summary + '</small><br><small><a href=' + data[i].URLref + ' target="_blank">' + data[i].URLref + '</a></p><hr>');
       }
-      $("#scrapeNow").text('News Pulled!');
-      $("#scrapeNow").addClass('disabled');
       $('[data-toggle="tooltip"]').tooltip({
         delay: 250
       });
 
       scraped = true;
+      $("#scrapeNow").text("Refresh Scrape!");
     } else {
       $("#scrapeNow").text('No Articles stored: Pull News Now!');
       scraped = false;
@@ -95,7 +94,7 @@ window.onload = function (e) {
   getArticles();
   $("#scrapeNow").on('click', function (e) {
     if (scraped) {
-      return 0;
+      $("#articles").empty();
     }
 
     $("#scrapeNow").text('Loading...');
