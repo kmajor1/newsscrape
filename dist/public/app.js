@@ -30,6 +30,7 @@ function getArticles() {
 
 $(document).on('click', 'p', function () {
   $("#comments").empty();
+  location.href = "#comments";
   var clickedId = $(this).attr('data-id');
 
   // GET request to retrieve article that was clicked 

@@ -5,18 +5,4 @@ span.headline:hover {
 
 }
 
-#options {
-  position: relative;
-  
-}
-
-#commentHolder {
-  position: fixed; 
-  top: 200px;
-  right: 0; 
-}
-
-#articles {
-  overflow: scroll;
-}
 
